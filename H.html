@@ -1,0 +1,382 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MYWEBSITE v 0.1.8</title>
+        <!-- Fonts -->
+        <link
+            rel="preconnect"
+            href="https://
+fonts.googleapis.com"
+        />
+        <link
+            rel="preconnect"
+            href="https://
+fonts.gstatic.com"
+            crossorigin
+        />
+        <link
+            href="https://fonts.googleapis.com/ css2?family=Poppins:ital,wght@0,100;0,300;
+0,400;0,700;1,700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Feather Icons -->
+        <script src="https://unpkg.com/feather-icons"></script>
+        <!-- My Style -->
+        <style type="text/css" media="all">
+          :root {
+    --primary: #c6df66;
+    --bg: #010101;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--bg);
+    color: #fff;
+    min-height: 2000px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem;
+    background-color: #010101;
+    border-bottom: 1px solid var(--primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.navbar .navbar-logo {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    font-style: italic;
+}
+
+.navbar .navbar-logo span {
+    color: var(--primary);
+}
+
+.navbar-nav a {
+    color: #fff;
+    display: inline-block;
+    font-size: 1.6rem;
+    margin: 0 1rem;
+}
+
+.navbar .navbar-nav a:hover {
+    color: var(--primary);
+}
+
+.navbar .navbar-extra a {
+    color: #fff;
+    margin: 0.5rem;
+}
+
+.navbar .navbar-extra a:hover {
+    color: var(--primary);
+}
+
+.navbar .navbar-nav a::after {
+    content: "";
+    display: block;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid var(--primary);
+    transform: scaleX(0);
+    transition: 0.3s;
+}
+
+.navbar .navbar-nav a:hover::after {
+    transform: scaleX(0.5);
+}
+
+#hamburger-menu {
+    display: none;
+}
+
+/*HERO SECTION*/
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: url("image/header-bg.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(225,225,225,0) 8%,
+        rgba(225,225,225,0) 50%
+    );
+}
+
+.hero .content {
+  padding: 1.4rem 7%;
+  max-width: 60rem;
+}
+
+.hero .content h1 {
+  font-size: 5rem;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(1,1,3,0.5);
+  line-height: 1.2;
+}
+
+.hero .content h1 span {
+  color: var(--primary);
+}
+
+.hero .content p {
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  line-height: 1.4;
+  font-weight: 100;
+  text-shadow: 1px 1px 3px rgba(1,1,3,0.5)
+  mix-blend-mode: diffrence;
+}
+
+.hero .content .cta {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 1rem 3rem;
+  font-size: 1.4rem;
+  color: #fff;
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 3px rgba(1,1,3,0.5);
+}
+
+/*ABOUT SECTION*/
+.about {
+  padding: 8rem 7% 1.4rem;
+}
+
+.about h2 {
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 3rem;
+}
+
+.about h2 span {
+  color: var(--primary);
+}
+
+.about .row {
+  display: flex;
+}
+
+.about .row .about-img {
+  flex: 1 1 45rem;
+}
+
+.about .row .about-img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.about .row .content {
+  flex: 1 1 35rem;
+  padding: 0 1rem;
+}
+
+.about .row .content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.about .row .content p {
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 100;
+  line-height: 1.6;
+}
+
+
+/*DISPLAY QUARIES*/
+
+/*LAPTOP/PC*/
+@media (max-width: 1366px) {
+    html {
+        font-size: 70%;
+    }
+}
+
+/*TABLET*/
+@media (max-width: 768px) {
+    html {
+        font-size: 62, 5%;
+    }
+
+    #hamburger-menu {
+        display: inline-block;
+    }
+
+    .navbar .navbar-nav {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        background-color: #fff;
+        width: 30rem;
+        height: 100vh;
+        transition: 0.3s;
+    }
+
+    .navbar .navbar-nav.active {
+        right: 0;
+    }
+
+    .navbar .navbar-nav a {
+        color: var(--bg);
+        display: block;
+        margin: 1.5rem;
+        padding: 0.5rem;
+        font-size: 2rem;
+    }
+
+    .navbar .navbar-nav a::after {
+        transform-origin: 0 0;
+    }
+.about .row {
+  flex-wrap: wrap;
+}
+
+.about .row .about-img img {
+  height: 24rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about .row .content {
+  padding: 0;
+}
+
+.about .row .content h3 {
+  margin-top: 1rem;
+  font-size: 2rem;
+}
+
+.about .row .content p {
+  font-size: 1.6rem;
+}
+
+}
+
+/*HANDPHONE*/
+@media (max-width: 450px) {
+    html {
+        font-size: 53%;
+    }
+}
+
+        </style>
+    </head>
+    <body>
+        <!-- Navbar start -->
+        <nav class="navbar">
+            <a href="#" class="navbar-logo">My<span>.website</span></a>
+            <div class="navbar-nav">
+                <a href="#home">HOME</a>
+                <a href="#about">ABOUT ME</a>
+                <a href="#project">PROJECT</a>
+            </div>
+
+            <div class="navbar-extra">
+                <a id="hamburger-menu" href="#"><i data-feather="menu"></i></a>
+            </div>
+        </nav>
+        <!-- Navbar end -->
+
+        <!--Hero Section Start-->
+        <section class="hero" id="home">
+            <main class="content">
+                <h1>Welcome To <span>My.Website</span></h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eligendi, eius!
+                </p>
+                <a class="cta" href="#">MyProject</a>
+            </main>
+        </section>
+        <!--Hero Section-->
+
+        <!--About Section Start-->
+        <section id="about" class="about">
+            <h2><span>About</span> Me</h2>
+
+            <div class="row">
+                <div class="about-img">
+                    <img
+                        src="Me.jpeg"
+                        alt="Zongli Say Hello"
+                        width="300"
+                        height="300"
+                    />
+                </div>
+                <div class="content">
+                    <h3>This Is About Me</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquhabb hshsuzzvd
+                        shshsvs shd d hdhss dhdvs shu sushsvhshshs hrhhdhdhdb
+                        sudbdbshysgs hddhsbsbhsys shsbsvshe sbsubd d jsbs e hhh
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!--About Section End-->
+
+        <!-- Feather Icons -->
+        <script>
+            feather.replace();
+        </script>
+
+        <!--my JavaScript-->
+<script type="text/javascript" charset="utf-8">
+  // Toggle Class Active
+const navbarNav = document.querySelector(".navbar-nav");
+// Ketika Hamburger Menu DI Klik
+document.querySelector("#hamburger-menu").onclick = () => {
+  navbarNav.classList.toggle("active");
+};
+
+// Klik DIluar Sidebar Untuk Menghilangkan Nav
+const hamburger = document.querySelector("#hamburger-menu");
+
+document.addEventListener("click", function (e) {
+  if (!hamburger.contains(e.target) && !navbarNav.contains(e.target)) {
+    navbarNav.classList.remove("active");
+  }
+});
+
+</script>
+    </body>
+</html>
