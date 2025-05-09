@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Downloader</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      margin-top: 30px;
+    }
+    input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      display: none;
+    }
+    .thumbnail {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+    }
+    .format-btn {
+      display: block;
+      margin: 5px 0;
+      padding: 8px 12px;
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+    .format-btn:hover {
+      background: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <h1>YouTube Downloader</h1>
+  <div class="container">
+    <input type="text" id="url" placeholder="Masukkan URL YouTube">
+    <button onclick="getVideoInfo()">Cari</button>
+    
+    <div id="videoInfo" class="result">
+      <h2 id="videoTitle"></h2>
+      <img id="thumbnail" class="thumbnail" src="" alt="Thumbnail">
+      
+      <h3>Pilihan Download:</h3>
+      <div id="qualityOptions"></div>
+    </div>
+  </div>
+
+  <script>
+    async function getVideoInfo() {
+      const url = document.getElementById('url').value.trim();
+      if (!url) return alert('Masukkan URL YouTube');
+      
+      try {
+        const response = await fetch(`/info?url=${encodeURIComponent(url)}`);
+        if (!response.ok) throw new Error(await response.text());
+        
+        const data = await response.json();
+        displayVideoInfo(data);
+      } catch (error) {
+        alert('Error: ' + error.message);
+        console.error(error);
+      }
+    }
+
+    function displayVideoInfo(data) {
+      document.getElementById('videoTitle').textContent = data.title;
+      document.getElementById('thumbnail').src = data.thumbnail;
+      
+      const optionsDiv = document.getElementById('qualityOptions');
+      optionsDiv.innerHTML = '';
+      
+      // Tambahkan opsi video
+      const videoFormats = data.formats.filter(f => f.type === 'video');
+      if (videoFormats.length > 0) {
+        const videoHeader = document.createElement('h4');
+        videoHeader.textContent = 'Video:';
+        optionsDiv.appendChild(videoHeader);
+        
+        videoFormats.forEach(format => {
+          const btn = document.createElement('button');
+          btn.className = 'format-btn';
+          btn.textContent = `${format.quality}`;
+          btn.onclick = () => downloadVideo(format.itag, 'video');
+          optionsDiv.appendChild(btn);
+        });
+      }
+      
+      // Tambahkan opsi audio
+      const audioFormats = data.formats.filter(f => f.type === 'audio');
+      if (audioFormats.length > 0) {
+        const audioHeader = document.createElement('h4');
+        audioHeader.textContent = 'Audio:';
+        optionsDiv.appendChild(audioHeader);
+        
+        audioFormats.forEach(format => {
+          const btn = document.createElement('button');
+          btn.className = 'format-btn';
+          btn.textContent = `${format.quality}`;
+          btn.onclick = () => downloadVideo(format.itag, 'audio');
+          optionsDiv.appendChild(btn);
+        });
+      }
+      
+      document.getElementById('videoInfo').style.display = 'block';
+    }
+
+    function downloadVideo(itag, type) {
+      const url = document.getElementById('url').value.trim();
+      window.open(`/download?url=${encodeURIComponent(url)}&itag=${itag}&type=${type}`, '_blank');
+    }
+  </script>
+</body>
+</html>
